@@ -10,13 +10,13 @@ export class CoursesController {
 
     }
     @Get()
-    findAll(@Res() response) {
-       return response.status(200).send(this.coursesService.findAll());
+    async findAll(@Res() response) {
+       return response.status(200).send(await this.coursesService.findAll());
     }
 
     @Get(':id')
-    findOne(@Res() response, @Param('id') id:string) {
-        return response.status(200).send(this.coursesService.findOne(id));
+    async findOne(@Res() response, @Param('id') id:string) {
+        return response.status(200).send(await this.coursesService.findOne(id));
     }
 
     @Post()
@@ -26,8 +26,10 @@ export class CoursesController {
     }
 
     @Patch(':id')
-    update(@Param('id') id:string, @Body() udapteCourseDto: UpdateCourseDto, @Res() response) {
-        return response.status(200).send(this.coursesService.update(id,udapteCourseDto));
+    async update(@Param('id') id:string, @Body() updapteCourseDto: UpdateCourseDto, @Res() response) {
+        console.log('patch', updapteCourseDto)
+        console.log('id', id)
+        return response.status(200).send(await this.coursesService.update(id,updapteCourseDto));
     }
 
     @Delete(':id')
